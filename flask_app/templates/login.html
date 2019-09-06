@@ -1,0 +1,30 @@
+<html>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+    </head>
+<body>
+<div class="container h-80">
+<div class="row align-items-center h-100">
+    <div class="col-3 mx-auto">
+        <div class="text-center">
+            <img id="profile-img" class="rounded-circle profile-img-card" src="https://i.imgur.com/6b6psnA.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form  class="form-signin" action = "{{ url_for('login') }}" method = "POST">
+
+                <input type="text" name="username" id="username" class="form-control form-group"
+                    placeholder="user email" required autofocus>
+                <input type="password" name="password" id="inputPassword" class="form-control form-group"
+                       placeholder="password" >
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+                <button class="btn btn-lg btn-primary btn-block" type="cancel">Cancel</button>
+            </form><!-- /form -->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

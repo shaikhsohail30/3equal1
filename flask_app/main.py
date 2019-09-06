@@ -1,8 +1,11 @@
 import os
 
 from flask import Flask, render_template, request, jsonify
+from werkzeug import secure_filename
 import sqlite3 as sql
 import pdb
+
+
 
 app = Flask(__name__)
 
@@ -10,6 +13,40 @@ app = Flask(__name__)
 @app.route('/homepage/<user>')
 def hello(user):
     return render_template('home.html', name=user)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.route('/upload')
+def upload_page():
+    return render_template('uploader.html')
+
+
+@app.route('/uploader', methods=['GET', 'POST'])
+def uploader():
+    if request.method == 'POST':
+        f = request.files['file']
+        dir = os.path.dirname(__file__)
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(dir, 'upload_folder', filename))
+        return 'file uploaded successfully'
+
+@app.route('/sign-in', methods =['POST'] )
+def sign_in():
+    if request.method == 'POST':
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            with sql.connect("database.db") as con:
+                cur = con.cursor()
+
+                con.commit()
+        except:
+            pass
+
+    return render_template('login.html')
 
 
 @app.route('/stud')
@@ -113,6 +150,8 @@ def post_students():
                 )
             con.close()
     return jsonify({'students': students_list})
+
+
 
 
 if __name__ == '__main__':
