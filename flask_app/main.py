@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, request, jsonify
 from werkzeug import secure_filename
+from flask_login import LoginManager
 import sqlite3 as sql
 import pdb
 
@@ -9,6 +10,7 @@ import pdb
 
 app = Flask(__name__)
 
+login = LoginManager(app)
 
 @app.route('/homepage/<user>')
 def hello(user):
